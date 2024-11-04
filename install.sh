@@ -9,8 +9,8 @@ cp -v "${SCRIPT_DIR}/10-pdns-adblock-install" /config/scripts/commit/post-hooks.
 mkdir -p out
 
 if [[ ! -f "${SCRIPT_DIR}/config.txt" ]]; then
-  echo "allow_out /config/vyhole/out/allow.lua" >>"${SCRIPT_DIR}/config.lua"
-  echo "deny_out /config/vyhole/out/deny.lua" >>"${SCRIPT_DIR}/config.lua"
+  echo "allow_out /config/vyhole/out/allow.lua" >>"${SCRIPT_DIR}/config.txt"
+  echo "deny_out /config/vyhole/out/deny.lua" >>"${SCRIPT_DIR}/config.txt"
 
   mkdir -p /config/vyhole/out
 fi
