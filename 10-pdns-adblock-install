@@ -6,7 +6,7 @@ if [ "$(id -g -n)" != 'vyattacfg' ] ; then
     exec sg vyattacfg -c "/bin/vbash $(readlink -f $0) $@"
 fi
 
-echo "lua-dns-script=/config/vyhole/pdns-adblock-script.lua" | sudo tee -a /run/pdns-recursor/recursor.conf
+echo "lua-dns-script=/config/vyhole/pdns-adblock.lua" | sudo tee -a /run/pdns-recursor/recursor.conf
 
 # Need to restart PowerDNS in order to process conf change.
 run restart dns forwarding
