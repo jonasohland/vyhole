@@ -1,4 +1,4 @@
-block = newDS()
+deny = newDS()
 allow = newDS()
 
 deny:add(dofile("/config/vyhole/out/deny.lua"))
