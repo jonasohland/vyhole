@@ -1,0 +1,12 @@
+#!/bin/vbash
+# File: /config/scripts/commit/post-hooks.d/10-pdns-adblock-install
+
+source /opt/vyatta/etc/functions/script-template
+if [ "$(id -g -n)" != 'vyattacfg' ] ; then
+    exec sg vyattacfg -c "/bin/vbash $(readlink -f $0) $@"
+fi
+
+echo "lua-dns-script=/config/vyhole/pdns-adblock-script.lua" | sudo tee -a /run/pdns-recursor/recursor.conf
+
+# Need to restart PowerDNS in order to process conf change.
+run restart dns forwarding
