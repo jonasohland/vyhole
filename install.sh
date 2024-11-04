@@ -16,3 +16,5 @@ if [[ ! -f "${SCRIPT_DIR}/config.txt" ]]; then
 fi
 
 "${SCRIPT_DIR}/update.sh" "${SCRIPT_DIR}/config.txt"
+
+/config/scripts/commit/post-hooks.d/10-pdns-adblock-install
