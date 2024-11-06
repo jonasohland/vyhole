@@ -7,8 +7,8 @@ function try_link_id() {
     id_type="${1}"
 
     if [[ -f "/config/vyos/ssh/id_${id_type}" ]]; then
-        ln -svf "/config/vyos/ssh/id_${id_type}" "/home/vyos/.ssh/${id_type}"
-        ln -svf "/config/vyos/ssh/id_${id_type}.pub" "/home/vyos/.ssh/${id_type}.pub"
+        ln -svf "/config/vyos/ssh/id_${id_type}" "/home/vyos/.ssh/id_${id_type}"
+        ln -svf "/config/vyos/ssh/id_${id_type}.pub" "/home/vyos/.ssh/id_${id_type}.pub"
     fi
 }
 
