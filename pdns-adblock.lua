@@ -9,6 +9,8 @@ function preresolve(dq)
 		return false
 	end
 
+	pdnslog("blocked " .. dq.qname:toString())
+
 	dq.rcode = pdns.NXDOMAIN
 	return true
 end
