@@ -4,12 +4,12 @@ mkdir -p /config/vyos/ssh
 mkdir -p /home/vyos/.ssh
 
 function try_link_id() {
-    id_type="${1}"
+  id_type="${1}"
 
-    if [[ -f "/config/vyos/ssh/id_${id_type}" ]]; then
-        ln -svf "/config/vyos/ssh/id_${id_type}" "/home/vyos/.ssh/id_${id_type}"
-        ln -svf "/config/vyos/ssh/id_${id_type}.pub" "/home/vyos/.ssh/id_${id_type}.pub"
-    fi
+  if [[ -f "/config/vyos/ssh/id_${id_type}" ]]; then
+    ln -svf "/config/vyos/ssh/id_${id_type}" "/home/vyos/.ssh/id_${id_type}"
+    ln -svf "/config/vyos/ssh/id_${id_type}.pub" "/home/vyos/.ssh/id_${id_type}.pub"
+  fi
 }
 
 try_link_id rsa
@@ -17,11 +17,11 @@ try_link_id ecdsa
 try_link_id ed25519
 
 if [[ -f "/config/vyos/ssh/known_hosts" ]]; then
-    ln -svf "/config/vyos/ssh/known_hosts" "/home/vyos/.ssh/known_hosts"
+  ln -svf "/config/vyos/ssh/known_hosts" "/home/vyos/.ssh/known_hosts"
 fi
 
-chown -R vyos:vyos /home/vyos/.ssh
+chown -R vyos /home/vyos/.ssh
 
 if [[ -f "/config/vyos/gitconfig" ]]; then
-    ln -svf "/config/vyos/gitconfig" "/home/vyos/.gitconfig"
+  ln -svf "/config/vyos/gitconfig" "/home/vyos/.gitconfig"
 fi
