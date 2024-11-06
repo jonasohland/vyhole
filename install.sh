@@ -38,6 +38,10 @@ mkdir -p /config/scripts/commit/post-hooks.d
 cp -v "${SCRIPT_DIR}/10-pdns-adblock-install" /config/scripts/commit/post-hooks.d/
 cp -v "${SCRIPT_DIR}/vyos-postconfig-bootup.script" /config/scripts/
 
+if [[ -f "/config/vyos/ssh/known_hosts" ]]; then
+    ln -svf "/config/vyos/ssh/known_hosts" "/home/vyos/.ssh/known_hosts"
+fi
+
 mkdir -p out
 
 if [[ ! -f "${SCRIPT_DIR}/config.txt" ]]; then
