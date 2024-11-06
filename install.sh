@@ -25,6 +25,10 @@ try_move_id rsa
 try_move_id ecdsa
 try_move_id ed25519
 
+if [[ -f "/home/vyos/.ssh/known_hosts" ]] && ! test -L "/home/vyos/.ssh/known_hosts"; then
+    mv -v "/home/vyos/.ssh/known_hosts" "/config/vyos/ssh/known_hosts"
+fi
+
 if [[ -f "/home/vyos/.gitconfig" ]] && ! test -L "/home/vyos/.gitconfig"; then
     mv -v "/home/vyos/.gitconfig" "/home/vyos/gitconfig"
 fi
