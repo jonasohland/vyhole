@@ -53,5 +53,5 @@ fi
 
 "${SCRIPT_DIR}/update.sh" "${SCRIPT_DIR}/config.txt"
 
-/config/scripts/commit/vyos-postconfig-bootup.script
+/config/scripts/vyos-postconfig-bootup.script
 /config/scripts/commit/post-hooks.d/10-pdns-adblock-install
