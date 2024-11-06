@@ -1,0 +1,23 @@
+#! /bin/bash
+
+mkdir -p /config/vyos/ssh
+mkdir -p /home/vyos/.ssh
+
+function try_link_id() {
+  id_type="${1}"
+
+  if [[ -f "/config/vyos/ssh/id_${id_type}" ]]; then
+    ln -svf "/config/vyos/ssh/id_${id_type}" "/home/vyos/.ssh/${id_type}"
+    ln -svf "/config/vyos/ssh/id_${id_type}.pub" "/home/vyos/.ssh/${id_type}.pub"
+  fi
+}
+
+try_link_id rsa
+try_link_id ecdsa
+try_link_id ed25519
+
+chown -R vyos:vyos /home/vyos/.ssh
+
+if [[ -f "/config/vyos/gitconfig" ]]; then
+  ln -svf "/config/vyos/gitconfig" "/home/vyos/.gitconfig"
+fi
