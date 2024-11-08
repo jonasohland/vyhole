@@ -9,7 +9,7 @@ fi
 pdns_need_restart=no
 
 function add_pdns_conf_line() {
-    if ! grep -qxF "${1}" /run/pdns-recursor/pdns-recursor.conf ; then
+    if ! grep -qxF "${1}" /run/pdns-recursor/recursor.conf ; then
         sudo tee -a /run/pdns-recursor/recursor.conf <<< "${1}"
         pdns_need_restart="yes"
     fi
