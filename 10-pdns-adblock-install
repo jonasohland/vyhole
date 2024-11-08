@@ -2,11 +2,23 @@
 # File: /config/scripts/commit/post-hooks.d/10-pdns-adblock-install
 
 source /opt/vyatta/etc/functions/script-template
-if [ "$(id -g -n)" != 'vyattacfg' ] ; then
+if [[ "$(id -g -n)" != 'vyattacfg' ]] ; then
     exec sg vyattacfg -c "/bin/vbash $(readlink -f $0) $@"
 fi
 
-echo "lua-dns-script=/config/vyhole/pdns-adblock.lua" | sudo tee -a /run/pdns-recursor/recursor.conf
+pdns_need_restart=no
+
+function add_pdns_conf_line() {
+    if ! grep -qxF "${1}" /run/pdns-recursor/pdns-recursor.conf ; then
+        sudo tee -a /run/pdns-recursor/recursor.conf <<< "${1}"
+        pdns_need_restart="yes"
+    fi
+}
+
+add_pdns_conf_line "lua-dns-script=/config/vyhole/pdns-adblock.lua" 
+add_pdns_conf_line "loglevel=4"
 
 # Need to restart PowerDNS in order to process conf change.
-run restart dns forwarding
+if [[ "${pdns_need_restart}" = "yes" ]]; then
+    sudo systemctl restart pdns-recursor
+fi
